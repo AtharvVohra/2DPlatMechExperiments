@@ -1,9 +1,5 @@
 extends Node2D
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -12,4 +8,16 @@ func _ready():
 func _physics_process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
-	pass
+	check_input(delta)
+	movement_loop(delta)
+	
+func check_input(delta):
+	var LEFT	= Input.is_action_pressed("ui_left")
+	var RIGHT	= Input.is_action_pressed("ui_right")
+	
+	Globals.directionVector.x = -int(LEFT) + int(RIGHT)
+	# Globals.directionVector.y = -int(UP) + int(DOWN)
+	
+func movement_loop(delta):
+	var motion = Globals.directionVector.normalized() * Globals.MOVESPEED
+	var collision = $KinematicBody2D.move_and_collide(motion*delta)

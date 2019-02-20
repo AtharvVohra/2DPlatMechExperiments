@@ -3,6 +3,7 @@ extends Node
 var playerPos
 var mousePos
 var MOVESPEED = 230
+var GRAVITY = 10
 var projectionVector = Vector2(0, 0)
 var directionVector = Vector2(0, 0)
 
